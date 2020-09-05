@@ -31,6 +31,9 @@ app.use('/posts', postRoute);
 app.engine('html', require('./config/htmlEngine'));
 app.set('views', path.join(__dirname, '/front-end/view'));
 app.set('view engine', 'html');
+// Declaración de public folder
+app.use(express.static(__dirname + '/front-end/public'));
+
 
 // Puerto de conexion
 app.listen(3000, () => console.log('Corriendo'));

@@ -8,16 +8,12 @@ const {
 } = require('../validation/authValidation');
 
 // Rutas GET para el AUTH
-router.get('/', (req, res) => {
-    res.send('Registro/Inicio');
-});
-
 router.get('/register', (req, res) => {
-    res.send('Registro/Registro');
+    res.render('auth/register');
 });
 
 router.get('/login', (req, res) => {
-    res.send('Registro/Login');
+    res.render('auth/login');
 });
 
 
