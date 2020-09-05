@@ -1,10 +1,11 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
 // Importar las rutas
-const authRoute = require("./routes/auth");
+const homeRoute = require('./routes/home');
+const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 
 dotenv.config();
@@ -13,14 +14,15 @@ dotenv.config();
 mongoose.connect(
     process.env.DB_CONNECTION,
     { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log("Conectado a la base de datos")
+    () => console.log('Conectado a la base de datos')
 );
 
 // Middlewares
 app.use(express.json()); //Formato de JSON a RESQUEST
 // Middlewares de la ruta
-app.use("/user", authRoute);
+app.use('/', homeRoute);
+app.use('/user', authRoute);
 app.use('/posts', postRoute);
 
 // Puerto de conexion
-app.listen(3000, () => console.log("Corriendo"));
+app.listen(3000, () => console.log('Corriendo'));
