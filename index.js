@@ -20,6 +20,10 @@ mongoose.connect(
     () => console.log('Conectado a la base de datos')
 );
 
+// A todo REQUEST se le da formato JSON, debde de ser especificado antes de las rutas
+app.use(express.urlencoded({ extended:true }));
+app.use(express.json());
+
 // Middlewares
 app.use(express.json()); //Formato de JSON a RESQUEST
 // Middlewares de la ruta

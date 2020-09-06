@@ -1,3 +1,5 @@
+'use strict';
+
 const router = require('express').Router();
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
@@ -7,29 +9,29 @@ const {
     loginValidation
 } = require('../validation/authValidation');
 
-// Rutas GET para el AUTH
+// Get basic routes
 
 router.get('/', (req, res) => {
-    // res.redirect('/posts');
-    res.render('index');
+    // res.render('index');
+    res.send('Index');
 });
 
 router.get('/register', (req, res) => {
-    res.render('auth/register');
+    // res.render('auth/register');
+    res.send('Register');
 });
 
 router.get('/login', (req, res) => {
-    res.render('auth/login');
+    // res.render('auth/login');
+    res.send('Login');
 });
 
-// Ruta de prueba VUE.js
-router.get('/users', async (req, res) => {
-    const users = await User.find({});
-    res.send(users);
+router.get('/buscar', (req, res) => {
+    // res.render('auth/buscar');
+    res.send('buscar');
 });
 
-
-// Rutas POST para el AUTH
+// Login and Register
 
 // Registro
 router.post('/register', async (req, res) => {
@@ -47,9 +49,12 @@ router.post('/register', async (req, res) => {
 
     // Crear usuario
     const user = new User({
+        id: req.body.id,
         name: req.body.name,
         email: req.body.email,
-        password: hashedPassword
+        password: hashedPassword,
+        _rol: req.body._rol,
+        _permisos: req.body._permisos
     });
 
     try {
@@ -80,5 +85,40 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.header('auth-toke', token).send(token);
 });
+
+// Search, Update and delete users
+
+router.get('/buscar/:userId', async (req, res) => {
+    try {
+        const userFind = await User.find({ id: req.params.userId });
+        res.send(userFind);
+    } catch (err) {
+        return res.status(400).send('Usuario no encontrado');
+    }
+});
+
+
+router.delete('/eliminar/:userId', async (req, res) => {
+    try {
+        const removeUser = await User.remove({ id: req.params.userId });
+        res.send(removeUser);
+    } catch (err) {
+        return res.status(400).send('Usuario no encontrado');
+    }
+});
+
+router.patch('/actualizar/:userId', async (req, res) => {
+    try {
+        // Post.updateOne({ BUSQUEDA }, { parametros a actualizar });
+        const updateUser = await User.updateOne(
+            { id: req.params.userId },
+            { $set: { name: req.body.name } }
+        );
+        res.send(updateUser);
+    } catch (err) {
+        return res.status(400).send('Usuario no encontrado');
+    }
+});
+
 
 module.exports = router;

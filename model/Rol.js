@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('module');
 
-const userSchema = new mongoose.Schema({
+const rolSchema = new mongoose.Schema({
     id: {
         type: Number,
         require: true
@@ -11,16 +11,10 @@ const userSchema = new mongoose.Schema({
         max: 255,
         min: 6
     },
-    email: {
+    description: {
         type: String,
         required: true,
         max: 255,
-        min: 6
-    },
-    password: {
-        type: String,
-        required: true,
-        max: 1024,
         min: 6
     },
     created_at: {
@@ -35,8 +29,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
-    _rol: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rol' }],
-    _permisos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permisos' }]
+    _permisos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permit' }]
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Rol', rolSchema);
