@@ -12,23 +12,24 @@ const {
 // Get basic routes
 
 router.get('/', (req, res) => {
-    // res.render('index');
-    res.send('Index');
+    res.render('index');
+    // res.send('Index');
 });
 
 router.get('/register', (req, res) => {
-    // res.render('auth/register');
-    res.send('Register');
+    res.render('auth/register');
+    // res.send('Register');
 });
 
 router.get('/login', (req, res) => {
-    // res.render('auth/login');
-    res.send('Login');
+    res.render('auth/login');
+    // res.send('Login');
 });
 
-router.get('/buscar', (req, res) => {
-    // res.render('auth/buscar');
-    res.send('buscar');
+router.get('/buscar', async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+    // res.send('buscar');
 });
 
 // Login and Register
@@ -96,7 +97,6 @@ router.get('/buscar/:userId', async (req, res) => {
         return res.status(400).send('Usuario no encontrado');
     }
 });
-
 
 router.delete('/eliminar/:userId', async (req, res) => {
     try {

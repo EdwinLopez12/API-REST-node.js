@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
         default: null
     },
     _rol: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rol' }],
-    _permisos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permisos' }]
+    _permisos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permit' }]
 });
 
 module.exports = mongoose.model('User', userSchema);

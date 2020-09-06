@@ -8,8 +8,7 @@ const path = require('path');
 
 // Importar las rutas
 const homeRoute = require('./routes/home');
-// const authRoute = require('./routes/auth');
-const postRoute = require('./routes/posts');
+const pageRoute = require('./routes/page');
 
 dotenv.config();
 
@@ -26,15 +25,16 @@ app.use(express.json());
 
 // Middlewares
 app.use(express.json()); //Formato de JSON a RESQUEST
+
 // Middlewares de la ruta
 app.use('/', homeRoute);
-// app.use('/user', authRoute);
-app.use('/posts', postRoute);
+app.use('/page', pageRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
 app.set('views', path.join(__dirname, '/front-end/view'));
 app.set('view engine', 'html');
+
 // Declaración de public folder
 app.use(express.static(__dirname + '/front-end/public'));
 
