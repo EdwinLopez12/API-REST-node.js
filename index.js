@@ -8,7 +8,7 @@ const path = require('path');
 
 // Importar las rutas
 const homeRoute = require('./routes/home');
-const authRoute = require('./routes/auth');
+// const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 
 dotenv.config();
@@ -24,7 +24,7 @@ mongoose.connect(
 app.use(express.json()); //Formato de JSON a RESQUEST
 // Middlewares de la ruta
 app.use('/', homeRoute);
-app.use('/user', authRoute);
+// app.use('/user', authRoute);
 app.use('/posts', postRoute);
 
 // Configuracion de motor de plantillas a html

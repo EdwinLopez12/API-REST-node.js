@@ -24,10 +24,12 @@ const userSchema = new mongoose.Schema({
         default: Date.now()
     },
     updated_at: {
-        type: Date
+        type: Date,
+        default: null
     },
     deleted_at: {
-        type: Date
+        type: Date,
+        default: null
     }
 });
 
