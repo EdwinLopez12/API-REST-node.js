@@ -6,30 +6,33 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const {
     registerValidation,
-    loginValidation
+    loginValidation,
+    searchValidation,
+    updateValidation
 } = require('../validation/authValidation');
 
 // Get basic routes
 
 router.get('/', (req, res) => {
-    res.render('index');
-    // res.send('Index');
+    // res.render('index');
+    res.send('pagina principal-index');
 });
 
 router.get('/register', (req, res) => {
-    res.render('auth/register');
-    // res.send('Register');
+    // res.render('auth/register');
+    res.send('pagina principal -Register');
 });
 
 router.get('/login', (req, res) => {
-    res.render('auth/login');
-    // res.send('Login');
+    // res.render('auth/login');
+    res.send('pagina principal - Login');
 });
 
-router.get('/buscar', async (req, res) => {
+router.get('/search', async (req, res) => {
     const users = await User.find({});
-    res.json(users);
+    res.send(users);
     // res.send('buscar');
+    // users[1].name
 });
 
 // Login and Register
@@ -89,7 +92,10 @@ router.post('/login', async (req, res) => {
 
 // Search, Update and delete users
 
-router.get('/buscar/:userId', async (req, res) => {
+router.get('/search/:userId', async (req, res) => {
+    const { error } = searchValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
     try {
         const userFind = await User.find({ id: req.params.userId });
         res.send(userFind);
@@ -98,7 +104,10 @@ router.get('/buscar/:userId', async (req, res) => {
     }
 });
 
-router.delete('/eliminar/:userId', async (req, res) => {
+router.delete('/delete/:userId', async (req, res) => {
+    const { error } = searchValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
     try {
         const removeUser = await User.remove({ id: req.params.userId });
         res.send(removeUser);
@@ -107,16 +116,34 @@ router.delete('/eliminar/:userId', async (req, res) => {
     }
 });
 
-router.patch('/actualizar/:userId', async (req, res) => {
+router.patch('/update/:userId', async (req, res) => {
+    const { error } = updateValidation(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
     try {
         // Post.updateOne({ BUSQUEDA }, { parametros a actualizar });
+        // Hash al password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
         const updateUser = await User.updateOne(
             { id: req.params.userId },
-            { $set: { name: req.body.name } }
+            {
+                $set:
+                {
+                    id: req.body.id,
+                    name: req.body.name,
+                    email: req.body.email,
+                    // updated_at: now,
+                    password: hashedPassword,
+                    _rol: req.body._rol,
+                    _permisos: req.body._permisos
+                }
+            }
         );
         res.send(updateUser);
     } catch (err) {
-        return res.status(400).send('Usuario no encontrado');
+        return res.status(400).send(err);
     }
 });
 

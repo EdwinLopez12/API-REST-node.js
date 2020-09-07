@@ -1,14 +1,13 @@
 'use strict';
-
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
+const app = express();
 
 // Importar las rutas
 const homeRoute = require('./routes/home');
-const pageRoute = require('./routes/page');
+const permitRoute = require('./routes/permit');
 
 dotenv.config();
 
@@ -28,15 +27,15 @@ app.use(express.json()); //Formato de JSON a RESQUEST
 
 // Middlewares de la ruta
 app.use('/', homeRoute);
-app.use('/page', pageRoute);
+app.use('/permit', permitRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
-app.set('views', path.join(__dirname, '/front-end/view'));
+app.set('views', path.join(__dirname, '/public/view'));
 app.set('view engine', 'html');
 
 // Declaración de public folder
-app.use(express.static(__dirname + '/front-end/public'));
+app.use(express.static(__dirname + '/public'));
 
 
 // Puerto de conexion

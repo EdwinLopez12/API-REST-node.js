@@ -11,6 +11,14 @@ const permitSchema = new mongoose.Schema({
         max: 255,
         min: 6
     },
+    actions: [
+        { 
+            type: String, 
+            required: true,
+            max: 1,
+            min:1
+        }
+    ],
     description: {
         type: String,
         required: true,
