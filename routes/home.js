@@ -1,5 +1,6 @@
 'use strict';
 
+
 const router = require('express').Router();
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
@@ -33,7 +34,16 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/search', verify, async (req, res) => {
-    const users = await User.find();
+    const users = await User.aggregate([
+        {
+            $lookup:{
+                from: "rols",
+                localField: "_rol",
+                foreignField: "_id",
+                as: "rol_info"
+            }
+        }
+    ])
     res.send(users);
 });
 
