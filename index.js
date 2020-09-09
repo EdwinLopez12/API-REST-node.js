@@ -1,15 +1,15 @@
 'use strict';
-
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
+const app = express();
 
 // Importar las rutas
 const homeRoute = require('./routes/home');
-const authRoute = require('./routes/auth');
-const postRoute = require('./routes/posts');
+const permitRoute = require('./routes/permit');
+const viewRoute = require('./routes/view');
+const rolRoute = require('./routes/rol');
 
 dotenv.config();
 
@@ -20,19 +20,26 @@ mongoose.connect(
     () => console.log('Conectado a la base de datos')
 );
 
+// A todo REQUEST se le da formato JSON, debde de ser especificado antes de las rutas
+app.use(express.urlencoded({ extended:true }));
+app.use(express.json());
+
 // Middlewares
 app.use(express.json()); //Formato de JSON a RESQUEST
+
 // Middlewares de la ruta
 app.use('/', homeRoute);
-app.use('/user', authRoute);
-app.use('/posts', postRoute);
+app.use('/permit', permitRoute);
+app.use('/view', viewRoute);
+app.use('/rol', rolRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
-app.set('views', path.join(__dirname, '/front-end/view'));
+app.set('views', path.join(__dirname, '/public/view'));
 app.set('view engine', 'html');
+
 // Declaración de public folder
-app.use(express.static(__dirname + '/front-end/public'));
+app.use(express.static(__dirname + '/public'));
 
 
 // Puerto de conexion
