@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const app = express();
 
+app.disable('x-powered-by');
+
 // Importar las rutas
 const homeRoute = require('./routes/home');
 const permitRoute = require('./routes/permit');
