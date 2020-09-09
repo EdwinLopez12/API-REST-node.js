@@ -1,6 +1,13 @@
-// Validación
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi)
+
+const searchValidation = data => {
+  const schema = Joi.object({
+    id: Joi.number()
+      .required()
+  });
+  return schema.validate(data);
+};
 
 const registerValidation = data => {
   const schema = Joi.object({
@@ -16,8 +23,22 @@ const registerValidation = data => {
     password: Joi.string()
       .min(6)
       .required(),
-    _rol: Joi.objectId().required(),
-    _permisos: Joi.objectId()
+    _rol: Joi.array()
+      .items(
+        Joi.objectId()
+      )
+      .required(),
+    specialPermits: Joi.array().items(
+      Joi.object({
+        _view: Joi.objectId()
+          .required(),
+        actions: Joi.array()
+          .items(
+            Joi.string()
+              .required()
+          )
+      })
+    )
   });
   return schema.validate(data);
 };
@@ -35,13 +56,7 @@ const loginValidation = data => {
   return schema.validate(data);
 };
 
-const searchValidation = data => {
-  const schema = Joi.object({
-    id: Joi.number()
-      .required()
-  });
-  return schema.validate(data);
-};
+
 
 const updateValidation = data => {
   const schema = Joi.object({
@@ -57,11 +72,34 @@ const updateValidation = data => {
     password: Joi.string()
       .min(6)
       .required(),
-    _rol: Joi.objectId().required(),
-    _permisos: Joi.objectId()
+    _rol: Joi.array()
+      .items(
+        Joi.objectId()
+      )
+      .required(),
+    specialPermits: Joi.array().items(
+      Joi.object({
+        _view: Joi.objectId()
+          .required(),
+        actions: Joi.array()
+          .items(
+            Joi.string()
+              .required()
+          )
+      })
+    )
   });
   return schema.validate(data);
 };
+
+const deleteValidation = data => {
+  const schema = Joi.object({
+    id: Joi.number()
+      .required()
+  });
+  return schema.validate(data);
+};
+
 
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;

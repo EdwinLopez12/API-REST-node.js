@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const verify = require('./verifyToken');
 const Permit = require('../model/Permit');
-const { 
-    searchValidation, 
-    createValidation, 
-    updateValidation 
+const {
+    searchValidation,
+    createValidation,
+    updateValidation
 } = require('../validation/permitValidation');
 
 router.get('/', verify, (req, res) => {
@@ -13,7 +13,7 @@ router.get('/', verify, (req, res) => {
 });
 
 router.get('/search', verify, async (req, res) => {
-    const permits = await Permit.find({ id: req.body.id });
+    const permits = await Permit.find();
     res.send(permits);
 });
 

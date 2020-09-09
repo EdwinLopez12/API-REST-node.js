@@ -8,6 +8,8 @@ const app = express();
 // Importar las rutas
 const homeRoute = require('./routes/home');
 const permitRoute = require('./routes/permit');
+const viewRoute = require('./routes/view');
+const rolRoute = require('./routes/rol');
 
 dotenv.config();
 
@@ -28,6 +30,8 @@ app.use(express.json()); //Formato de JSON a RESQUEST
 // Middlewares de la ruta
 app.use('/', homeRoute);
 app.use('/permit', permitRoute);
+app.use('/view', viewRoute);
+app.use('/rol', rolRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));

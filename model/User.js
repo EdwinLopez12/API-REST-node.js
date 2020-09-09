@@ -23,6 +23,18 @@ const userSchema = new mongoose.Schema({
         max: 1024,
         min: 6
     },
+    _rol: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rol' }],
+    specialPermits: [
+        {
+            _view: { type: mongoose.Schema.Types.ObjectId, ref: 'View' },
+            actions: [{
+                type: String,
+                required: true,
+                max: 1,
+                min: 1
+            }]
+        }
+    ],
     created_at: {
         type: Date,
         default: Date.now()
@@ -34,9 +46,7 @@ const userSchema = new mongoose.Schema({
     deleted_at: {
         type: Date,
         default: null
-    },
-    _rol: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rol' }],
-    _permisos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Permit' }]
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);

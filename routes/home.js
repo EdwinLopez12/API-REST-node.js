@@ -8,7 +8,8 @@ const {
     registerValidation,
     loginValidation,
     searchValidation,
-    updateValidation
+    updateValidation,
+    deleteValidation
 } = require('../validation/authValidation');
 
 // Get basic routes
@@ -58,7 +59,7 @@ router.post('/register', async (req, res) => {
         email: req.body.email,
         password: hashedPassword,
         _rol: req.body._rol,
-        _permisos: req.body._permisos
+        specialPermits: req.body.specialPermits
     });
 
     try {
@@ -105,14 +106,14 @@ router.get('/search/:userId', async (req, res) => {
 });
 
 router.delete('/delete/:userId', async (req, res) => {
-    const { error } = searchValidation(req.body);
+    const { error } = deleteValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     try {
         const removeUser = await User.remove({ id: req.params.userId });
         res.send(removeUser);
     } catch (err) {
-        return res.status(400).send('Usuario no encontrado');
+        return res.status(400).send(err);
     }
 });
 
@@ -137,7 +138,7 @@ router.patch('/update/:userId', async (req, res) => {
                     // updated_at: now,
                     password: hashedPassword,
                     _rol: req.body._rol,
-                    _permisos: req.body._permisos
+                    specialPermits: req.body.specialPermits
                 }
             }
         );
