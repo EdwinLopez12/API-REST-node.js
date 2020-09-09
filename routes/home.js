@@ -4,6 +4,7 @@ const router = require('express').Router();
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const verify = require('./verifyToken');
 const {
     registerValidation,
     loginValidation,
@@ -11,6 +12,8 @@ const {
     updateValidation,
     deleteValidation
 } = require('../validation/authValidation');
+
+
 
 // Get basic routes
 
@@ -29,11 +32,9 @@ router.get('/login', (req, res) => {
     res.send('pagina principal - Login');
 });
 
-router.get('/search', async (req, res) => {
-    const users = await User.find({});
+router.get('/search', verify, async (req, res) => {
+    const users = await User.find();
     res.send(users);
-    // res.send('buscar');
-    // users[1].name
 });
 
 // Login and Register
@@ -93,7 +94,7 @@ router.post('/login', async (req, res) => {
 
 // Search, Update and delete users
 
-router.get('/search/:userId', async (req, res) => {
+router.get('/search/:userId', verify, async (req, res) => {
     const { error } = searchValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -105,7 +106,7 @@ router.get('/search/:userId', async (req, res) => {
     }
 });
 
-router.delete('/delete/:userId', async (req, res) => {
+router.delete('/delete/:userId', verify, async (req, res) => {
     const { error } = deleteValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -117,7 +118,7 @@ router.delete('/delete/:userId', async (req, res) => {
     }
 });
 
-router.patch('/update/:userId', async (req, res) => {
+router.patch('/update/:userId', verify, async (req, res) => {
     const { error } = updateValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
