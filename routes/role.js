@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 const verfify = require('./verifyToken');
-const Rol = require('../model/Rol');
+const Rol = require('../model/Role');
 const {
     searchValidation,
     createValidation,
@@ -94,45 +94,13 @@ module.exports = router;
 
 
 // {
-//     "id":1,
-//     "name": "coordinador",
-//     "description": "maxima autoridad",
-//     "permits" : [
+//     "id": 5,
+//     "name": "Administrador",
+//     "description": "administrador",
+//     "permits": [
 //         {
-//             "_view" : "5f56d36170082823d8349325",
-//             "actions" : ["c", "r", "u", "d"]
-//         },
-//         {
-//             "_view" : "5f56d48d70082823d8349326",
+//             "name": "permisos",
 //             "actions" : ["c", "r", "u", "d"]
 //         }
 //     ]
 // }
-
-
-// "id": 2,
-//         "name": "coordinador",
-//         "description": "maxima autoridad",
-//         "permits": [
-//             {
-//                 "actions": [
-//                     "c",
-//                     "r",
-//                     "u",
-//                     "d"
-//                 ],
-//                 "_id": "5f5720014d30b90fcccee95b",
-//                 "_view": "5f56d36170082823d8349325"
-//             },
-//             {
-//                 "actions": [
-//                     "c",
-//                     "r",
-//                     "u",
-//                     "d"
-//                 ],
-//                 "_id": "5f5720014d30b90fcccee95c",
-//                 "_view": "5f56d48d70082823d8349326"
-//             }
-//         ],
-//         "__v": 0

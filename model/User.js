@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema({
     _rol: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rol' }],
     specialPermits: [
         {
-            _view: { type: mongoose.Schema.Types.ObjectId, ref: 'View' },
+            name: {
+                type: String,
+                required: true,
+                max: 255,
+                min: 6
+            },
             actions: [{
                 type: String,
                 required: true,
