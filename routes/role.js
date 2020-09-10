@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const verfify = require('./verifyToken');
+const verify = require('./verifyToken');
 const Rol = require('../model/Role');
 const {
     searchValidation,
@@ -9,6 +9,8 @@ const {
     updateValidation,
     deleteValidation
 } = require('../validation/rolValidation');
+
+router.all('*', verify);
 
 router.get('/', (req, res) => {
     res.send('Rol - index');
@@ -90,17 +92,3 @@ router.delete('/delete/:rolId', async (req, res) => {
 
 
 module.exports = router;
-
-
-
-// {
-//     "id": 5,
-//     "name": "Administrador",
-//     "description": "administrador",
-//     "permits": [
-//         {
-//             "name": "permisos",
-//             "actions" : ["c", "r", "u", "d"]
-//         }
-//     ]
-// }

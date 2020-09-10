@@ -1,18 +1,17 @@
 'use strict';
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 const dotenv = require('dotenv');
 const path = require('path');
 const app = express();
 
-app.disable('x-powered-by');
-
 // Importar las rutas
 const homeRoute = require('./routes/home');
-const permitRoute = require('./routes/permit');
-const viewRoute = require('./routes/view');
-const rolRoute = require('./routes/role');
+const userRoute = require('./routes/user');
+const roleRoute = require('./routes/role');
 
+// Variables en el archivo .env
 dotenv.config();
 
 // Conectar a la base de datos
@@ -21,6 +20,9 @@ mongoose.connect(
     { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log('Conectado a la base de datos')
 );
+
+// Uso de Helmet
+app.use(helmet());
 
 // A todo REQUEST se le da formato JSON, debde de ser especificado antes de las rutas
 app.use(express.urlencoded({ extended:true }));
@@ -31,9 +33,8 @@ app.use(express.json()); //Formato de JSON a RESQUEST
 
 // Middlewares de la ruta
 app.use('/', homeRoute);
-app.use('/permit', permitRoute);
-app.use('/view', viewRoute);
-app.use('/rol', rolRoute);
+app.use('/user', userRoute);
+app.use('/role', roleRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
