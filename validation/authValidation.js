@@ -15,13 +15,16 @@ const registerValidation = data => {
       .required(),
     name: Joi.string()
       .min(6)
+      .max(255)
       .required(),
     email: Joi.string()
       .min(6)
+      .max(255)
       .required()
       .email(),
     password: Joi.string()
       .min(6)
+      .max(1024)
       .required(),
     _rol: Joi.array()
       .items(
@@ -29,15 +32,18 @@ const registerValidation = data => {
       )
       .required(),
     specialPermits: Joi.array().items(
-      Joi.object({
-        _view: Joi.objectId()
+      {
+        name: Joi.string()
+          .min(6)
+          .max(255)
           .required(),
-        actions: Joi.array()
-          .items(
-            Joi.string()
-              .required()
-          )
-      })
+        actions: Joi.array().items(
+          Joi.string()
+            .max(1)
+            .min(1)
+            .required()
+        )
+      }
     )
   });
   return schema.validate(data);
@@ -78,15 +84,18 @@ const updateValidation = data => {
       )
       .required(),
     specialPermits: Joi.array().items(
-      Joi.object({
-        _view: Joi.objectId()
+      {
+        name: Joi.string()
+          .min(6)
+          .max(255)
           .required(),
-        actions: Joi.array()
-          .items(
-            Joi.string()
-              .required()
-          )
-      })
+        actions: Joi.array().items(
+          Joi.string()
+            .max(1)
+            .min(1)
+            .required()
+        )
+      }
     )
   });
   return schema.validate(data);

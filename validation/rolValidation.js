@@ -22,16 +22,19 @@ const createValidation = data => {
             .max(255)
             .min(6),
         permits: Joi.array().items(
-            Joi.object({
-                _view: Joi.objectId()
-                    .required(),
-                actions: Joi.array()
-                    .items(
-                        Joi.string()
-                            .required()
-                    )
-            })
-        )
+            {
+              name: Joi.string()
+                .min(6)
+                .max(255)
+                .required(),
+              actions: Joi.array().items(
+                Joi.string()
+                  .max(1)
+                  .min(1)
+                  .required()
+              )
+            }
+          )
     });
     return schema.validate(data);
 };

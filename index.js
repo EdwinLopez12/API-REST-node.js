@@ -11,7 +11,7 @@ app.disable('x-powered-by');
 const homeRoute = require('./routes/home');
 const permitRoute = require('./routes/permit');
 const viewRoute = require('./routes/view');
-const rolRoute = require('./routes/rol');
+const rolRoute = require('./routes/role');
 
 dotenv.config();
 

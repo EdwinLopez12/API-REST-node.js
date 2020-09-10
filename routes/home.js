@@ -6,6 +6,7 @@ const User = require('../model/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const verify = require('./verifyToken');
+const mongoose = require('mongoose');
 const {
     registerValidation,
     loginValidation,
@@ -13,8 +14,6 @@ const {
     updateValidation,
     deleteValidation
 } = require('../validation/authValidation');
-
-
 
 // Get basic routes
 
@@ -34,17 +33,25 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/search', verify, async (req, res) => {
+    const userRefe = req.user._id;
+    console.log(userRefe);
     const users = await User.aggregate([
         {
-            $lookup:{
-                from: "rols",
+            $match:{
+                _id: new mongoose.Types.ObjectId(userRefe)
+            }
+        },
+        {
+            $lookup: {
+                from: "roles",
                 localField: "_rol",
                 foreignField: "_id",
                 as: "rol_info"
             }
         }
-    ])
+    ]);
     res.send(users);
+    console.log(users);
 });
 
 // Login and Register
@@ -161,3 +168,77 @@ router.patch('/update/:userId', verify, async (req, res) => {
 
 
 module.exports = router;
+
+
+// {
+//     "id": 1,
+//     "name": "coordinador",
+//     "email": "coordinador@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58ddeb3a95da0aa8529f4d"],
+// }
+    // 5f58e49e3a95da0aa8529f55
+// {
+//     "id": 2,
+//     "name": "Carlos coordinador",
+//     "email": "carloscoordinador@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58ddeb3a95da0aa8529f4d"],
+//     "specialPermits" : [
+//         {
+//             "name": "permisos",
+//             "actions" : ["c", "r", "u", "d"]
+//         }
+//     ]
+// }
+
+// {
+//     "id": 3,
+//     "name": "Asistente coordinacion",
+//     "email": "asistentecoordinador@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58e3983a95da0aa8529f51"]
+// }
+
+// {
+//     "id": 4,
+//     "name": "Instructor",
+//     "email": "instructor@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58e4543a95da0aa8529f53"]
+// }
+
+// {
+//     "id": 5,
+//     "name": "Instructor Julio",
+//     "email": "julioinstructor@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58e4543a95da0aa8529f53"],
+//     "specialPermits": [
+//         {
+//             "name": "aprendices",
+//             "actions" : ["c", "r", "u", "d"]
+//         },
+//         {
+//             "name": "cursos",
+//             "actions" : ["c", "r", "u", "d"]
+//         }
+//     ]
+// }
+
+// {
+//     "id": 6,
+//     "name": "administrador",
+//     "email": "administrador@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58e4c23a95da0aa8529f57"]
+// }
+
+
+// {
+//     "id": 7,
+//     "name": "Estudiantes",
+//     "email": "estudiante@correo.com",
+//     "password": "123456",
+//     "_rol" : ["5f58e49e3a95da0aa8529f55"]
+// }

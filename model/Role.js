@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const rolSchema = new mongoose.Schema({
+const roleSchema = new mongoose.Schema({
     id: {
         type: Number,
         require: true
@@ -19,7 +19,12 @@ const rolSchema = new mongoose.Schema({
     },
     permits: [
         {
-            _view: { type: mongoose.Schema.Types.ObjectId, ref: 'View' },
+            name: {
+                type: String,
+                required: true,
+                max: 255, 
+                min: 1
+            },
             actions: [
                 {
                     type: String,
@@ -42,7 +47,6 @@ const rolSchema = new mongoose.Schema({
         type: Date,
         default: null
     }
-
 });
 
-module.exports = mongoose.model('Rol', rolSchema);
+module.exports = mongoose.model('Role', roleSchema);
