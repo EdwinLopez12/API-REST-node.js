@@ -34,7 +34,7 @@ app.use(express.json()); //Formato de JSON a RESQUEST
 // Middlewares de la ruta
 app.use('/', homeRoute);
 app.use('/user', userRoute);
-app.use('/role', roleRoute);
+app.use('/rol', roleRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
