@@ -14,7 +14,7 @@ const roleRoute = require('./routes/role');
 // Variables en el archivo .env
 dotenv.config();
 
-// Conectar a la base de datos
+// Conectar a la base de datos remota
 mongoose.connect(
     process.env.DB_CONNECTION,
     { useNewUrlParser: true, useUnifiedTopology: true },

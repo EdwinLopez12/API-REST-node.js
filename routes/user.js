@@ -37,15 +37,15 @@ router.all('*', verify, async (req, res, next) => {
         // console.log(rolUser[i]); //Devuelve rol + permisos
         for (var j = 0; j < rolUser[i].permits.length; j++) {
             // console.log(rolUser[i].permits[j].name);
-            if (rolUser[i].permits[j].name == 'usuarios'){
+            if (rolUser[i].permits[j].name == 'usuarios') {
                 // console.log("Tiene el permiso: "+rolUser[i].permits[j].name);
                 hasPermits = true;
-            }else{
+            } else {
                 continue;
-            } 
+            }
             for (var k = 0; k < rolUser[i].permits[j].actions.length; k++) {
                 // console.log(rolUser[i].permits[j].actions[k]);
-                if(rolUser[i].permits[j].actions[k] == letter){
+                if (rolUser[i].permits[j].actions[k] == letter) {
                     // console.log("Permite la accion: "+rolUser[i].permits[j].actions[k]);
                     hasAction = true;
                 }
@@ -53,16 +53,16 @@ router.all('*', verify, async (req, res, next) => {
         }
     }
 
-    if(users[0].specialPermits.length > 0){
-        for(var i=0; i<users[0].specialPermits.length; i++){
-            if(users[0].specialPermits[i].name == 'usuarios'){
+    if (users[0].specialPermits.length > 0) {
+        for (var i = 0; i < users[0].specialPermits.length; i++) {
+            if (users[0].specialPermits[i].name == 'usuarios') {
                 // console.log("Tiene el permiso: "+rolUser[i].permits[j].name);
                 hasPermits = true;
-            }else{
+            } else {
                 continue;
             }
             for (var j = 0; j < users[0].specialPermits[i].actions.length; j++) {
-                if(users[0].specialPermits[i].actions[j] == letter){
+                if (users[0].specialPermits[i].actions[j] == letter) {
                     // console.log("Permite la accion: "+rolUser[i].permits[j].actions[j]);
                     hasAction = true;
                 }
@@ -70,12 +70,12 @@ router.all('*', verify, async (req, res, next) => {
         }
     }
 
-    if(hasPermits== true && hasAction == true){
+    if (hasPermits == true && hasAction == true) {
         next();
-    }else{
+    } else {
         return res.status(401).send('Acceso denegado');
     }
-    
+
 });
 
 router.get('/', async (req, res) => {
@@ -94,6 +94,23 @@ router.get('/search', async (req, res) => {
         }
     ]);
     res.send(users);
+});
+
+// Rutas de pruebas
+router.get('/create', async (req, res) => {
+    res.send('Usuarios - create');
+});
+
+router.get('/search', async (req, res) => {
+    res.send('Usuarios - search');
+});
+
+router.get('/delete', async (req, res) => {
+    res.send('Usuarios - delete');
+});
+
+router.get('/update', async (req, res) => {
+    res.send('Usuarios - update');
 });
 
 // Search, Update and delete users

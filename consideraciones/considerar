@@ -1,0 +1,18 @@
+// Todas las rutas y peticiones se les pasa una verificacion
+// router.all('*', verify);
+// req.origianlUrl
+
+// app.use('/admin', function (req, res, next) { // GET 'http://www.example.com/admin/new'
+//   console.dir(req.originalUrl) // '/admin/new'
+//   console.dir(req.baseUrl) // '/admin'
+//   console.dir(req.path) // '/new'
+//   next()
+// })
+
+// res.end()
+// res.status(404).end()
+// res.redirect('ruta');
+
+// manejo de errores desde la ruta
+// const error = true;
+// if(error) return res.sendStatus(404);

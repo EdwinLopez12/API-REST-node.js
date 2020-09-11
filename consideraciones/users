@@ -1,0 +1,12 @@
+Update user
+[5f58e668c976f92bc0c89f47] = coordinador ID
+
+"id":1,
+"name":"coordinador",
+"email":"coordi@gmail.com"
+"password":"123456",
+"_rol": ["5f58ddeb3a95da0aa8529f4d"],
+"specialPermits": [{
+    "name": "usuarios",
+    "actions": ["c", "r"]
+}]
