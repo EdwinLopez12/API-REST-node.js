@@ -12,18 +12,18 @@ const {
 // Get basic routes
 
 router.get('/', (req, res) => {
-    // res.render('index');
-    res.send('pagina principal-index');
+    res.render('index');
+    // res.send('pagina principal-index');
 });
 
 router.get('/register', (req, res) => {
-    // res.render('auth/register');
-    res.send('pagina principal -Register');
+    res.render('auth/register');
+    // res.send('pagina principal -Register');
 });
 
 router.get('/login', (req, res) => {
-    // res.render('auth/login');
-    res.send('pagina principal - Login');
+    res.render('auth/login');
+    // res.send('pagina principal - Login');
 });
 
 // Login and Register

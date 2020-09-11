@@ -10,6 +10,11 @@ const app = express();
 const homeRoute = require('./routes/home');
 const userRoute = require('./routes/user');
 const roleRoute = require('./routes/role');
+// Pruebas de usuarios
+const instructorRoute = require('./routes/instructor');
+const learnerRoute = require('./routes/learner');
+const courseRoute = require('./routes/course');
+const ratingRoute = require('./routes/rating');
 
 // Variables en el archivo .env
 dotenv.config();
@@ -35,6 +40,11 @@ app.use(express.json()); //Formato de JSON a RESQUEST
 app.use('/', homeRoute);
 app.use('/user', userRoute);
 app.use('/rol', roleRoute);
+// Pruebas de usuarios
+app.use('/instructor', instructorRoute);
+app.use('/learner', learnerRoute);
+app.use('/course', courseRoute);
+app.use('/rating', ratingRoute);
 
 // Configuracion de motor de plantillas a html
 app.engine('html', require('./config/htmlEngine'));
