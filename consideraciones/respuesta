@@ -1,0 +1,74 @@
+    // rolUser.forEach(function (item) {
+    //     // console.log(item.name); // capa general (todos los datos)
+    //     item.permits.forEach(function (permitsItem) {
+    //         // console.log("permisos = "+permitsItem.name); // muestra cada permiso
+    //         // if (!permitsItem.name === 'usuarios') return res.status(401).send('Acceso denegado');
+    //         if (permitsItem.name == "usuarios") hasPermits=true, number=counter;
+    //         counter+=1;
+    //         permitsItem.actions.forEach(function (actionItem) {
+    //             // console.log("actions = "+actionItem); //muestra cada accion en la vistas
+    //             if (actionItem == letter) console.log("Accion no igual");
+    //         });
+    //     });
+    // });
+[
+    {
+        "_id": "5f58e668c976f92bc0c89f47",
+        "_rol": [
+            "5f58ddeb3a95da0aa8529f4d"
+        ],
+        "created_at": "2020-09-09T14:22:11.448Z",
+        "updated_at": null,
+        "deleted_at": null,
+        "id": 1,
+        "name": "coordinador",
+        "email": "coordinador@correo.com",
+        "password": "$2a$10$JD2kulmTkgJC5S8yOobnTOIDPIWw8oFN4AmByNBeOTFzMPt.fNUWC",
+        "specialPermits": [],
+        "__v": 0,
+        "rol_info": [
+            {
+                "_id": "5f58ddeb3a95da0aa8529f4d",
+                "created_at": "2020-09-09T13:51:26.126Z",
+                "updated_at": null,
+                "deleted_at": null,
+                "id": 1,
+                "name": "Coordinador",
+                "description": "Maxima autoridad",
+                "permits": [
+                    {
+                        "actions": [
+                            "c",
+                            "r",
+                            "u",
+                            "d"
+                        ],
+                        "_id": "5f58ddeb3a95da0aa8529f4e",
+                        "name": "instructores"
+                    },
+                    {
+                        "actions": [
+                            "c",
+                            "r",
+                            "u",
+                            "d"
+                        ],
+                        "_id": "5f58ddeb3a95da0aa8529f4f",
+                        "name": "aprendices"
+                    },
+                    {
+                        "actions": [
+                            "c",
+                            "r",
+                            "u",
+                            "d"
+                        ],
+                        "_id": "5f58ddeb3a95da0aa8529f50",
+                        "name": "cursos"
+                    }
+                ],
+                "__v": 0
+            }
+        ]
+    }
+]

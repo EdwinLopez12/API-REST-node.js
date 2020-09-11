@@ -1,0 +1,28 @@
+usuarios: {
+    _id
+    id
+    nombre
+    correo
+    password
+    _rol []
+    permisos especiales [
+        vistas: [
+            nombre
+            acciones: [
+                
+            ]
+        ]
+    ]
+}
+
+rol: {
+    _id
+    nombre
+    descripcion
+    vistas: [
+        nombre
+        acciones: [
+
+        ]
+    ]
+}
