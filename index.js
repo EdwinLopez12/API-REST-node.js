@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const path = require('path');
 const app = express();
 
@@ -28,6 +29,7 @@ mongoose.connect(
 
 // Uso de Helmet
 app.use(helmet());
+app.use(cors());
 
 // A todo REQUEST se le da formato JSON, debde de ser especificado antes de las rutas
 app.use(express.urlencoded({ extended:true }));

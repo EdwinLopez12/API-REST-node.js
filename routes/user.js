@@ -31,7 +31,7 @@ router.all('*', verify, async (req, res, next) => {
     if (letter === 's') letter = 'r';
 
     console.log(baseRoute);
-    console.log(letter);
+    console.log(actionRoute);
 
     for (var i = 0; i < rolUser.length; i++) {
         // console.log(rolUser[i]); //Devuelve rol + permisos
