@@ -22,3 +22,7 @@ Pequeña aplicación de los conocimientos sobre Node.js enfocados a una app de g
 Permite el CRUD de usuarios y el login, así como la validación de los permisos sobre las rutas y los roles que este posea, enfocados a un ambiente escolar (Instructores, cursos, estudiantes, administradores, entre otros). Incluye las rutas para el CRUD de roles.
 En caso de que el usuario logueado no tenga los permisos sobre la vista, la app retornara un mensaje de **"Acceso denegado"**, al igual que sucederá en caso de no haberse logueado y obtenido el Json web token (este se enviará a través de los headers).
 Todos estos procesos se hacen utilizando la herramientas **Postaman**.
+
+## Conexión DB
+
+La conexión a la base de datos se hizo para (ATLAS-MongoDB)[https://www.mongodb.com/cloud/atlas] y en el archivo .env se incluyen las variables para dicha conexión.
