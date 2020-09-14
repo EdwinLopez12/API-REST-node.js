@@ -25,4 +25,4 @@ Todos estos procesos se hacen utilizando la herramientas **Postaman**.
 
 ## Conexión DB
 
-La conexión a la base de datos se hizo para (ATLAS-MongoDB)[https://www.mongodb.com/cloud/atlas] y en el archivo .env se incluyen las variables para dicha conexión.
+La conexión a la base de datos se hizo para [ATLAS-MongoDB](https://www.mongodb.com/cloud/atlas) y en el archivo .env se incluyen las variables para dicha conexión.
